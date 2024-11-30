@@ -1,0 +1,25 @@
+# Build output
+/bin/
+/obj/
+
+# Dependency directories
+/vendor/
+
+# Go workspace
+GOPATH/
+
+# IDE and editor folders
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Go test output
+*.test
+
+# Coverage reports
+*.cover
