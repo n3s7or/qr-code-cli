@@ -6,7 +6,7 @@ A simple Go-based command-line application that reads an image from the clipboar
 ## Prerequisites
 Before running the application, make sure you have the following installed:
 - **xsel** (Linux only): Required for clipboard access on Linux systems.
-  - Install `xsel` using the following command:
+  - Install `xclip` using the following command:
     ```bash
-    sudo apt install xsel
+    sudo apt install xclip
     ```
