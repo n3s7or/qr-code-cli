@@ -20,14 +20,13 @@ import (
 // }
 
 
-// TODO: check datatypes first before invoking xclip
-func PasteFromClipboard(target string) (string, error) {
+func PasteFromClipboard(target string) ([]byte, error) {
     dataTypes := clipboard.GetClipboardDataTypes()
     if target != dataTypes.TextPlain &&
        target != dataTypes.ImagePNG &&
        target != dataTypes.ImageJPEG &&
        target != dataTypes.ImageBMP {
-        return "", fmt.Errorf("invalid clipboard data type: %s", target)
+        return []byte(""), fmt.Errorf("invalid clipboard data type: %s", target)
     }
     
     cmd := exec.Command("xclip", "-selection", "clipboard", "-t", target, "-o")
@@ -38,20 +37,20 @@ func PasteFromClipboard(target string) (string, error) {
 
     err := cmd.Run()
     if err != nil {
-        return "", fmt.Errorf("failed to paste from clipboard: %v, error output: %s", err, errOut.String())
+        return []byte(""), fmt.Errorf("failed to paste from clipboard: %v, error output: %s", err, errOut.String())
     }
-    return out.String(), nil
+    return out.Bytes(), nil
 }
 
 
-func _GetTargets() (string, error) {
-    cmd := exec.Command("xclip", "-selection", "clipboard", "-t", "TARGETS", "-o")
-    var out bytes.Buffer
-    cmd.Stdout = &out
-    err := cmd.Run()
-    if err != nil {
-        return "", fmt.Errorf("failed to paste from clipboard: %v", err)
-    }
-    return out.String(), nil
-}
+// func _GetTargets() (string, error) {
+//     cmd := exec.Command("xclip", "-selection", "clipboard", "-t", "TARGETS", "-o")
+//     var out bytes.Buffer
+//     cmd.Stdout = &out
+//     err := cmd.Run()
+//     if err != nil {
+//         return "", fmt.Errorf("failed to paste from clipboard: %v", err)
+//     }
+//     return out.String(), nil
+// }
 
